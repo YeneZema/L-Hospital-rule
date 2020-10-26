@@ -1,0 +1,26 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections}
+\usepackage{kpfonts}
+\begin{document}
+\begin{tikzpicture}
+    % Axes
+    \draw [->, name path=x] (-1,0) -- (9.5,0) node [right] {$x$};
+    \draw [->] (0,-1) -- (0,6) node [above] {$y$};
+    % Origin
+    \node at (0,0) [below left] {$0$};
+    % Points
+    \coordinate (start) at (1,0);
+    \coordinate (c) at (4.5,3.5);
+    \coordinate (end) at (9,0);
+    \draw [thick,name path=curve] (start) to[out=70,in=180]
+        (c) to[out=0,in=180] (end);
+        \draw [dashed] let \p1=(c) in (c) -- (\x1,0) node [below] {$c$};
+        \draw ($(c)-(0.75,0)$) -- ($(c)+(0.75,0)$) node [midway,above=4mm] {$f'(c)=0$};
+    % add a and b
+    \path [name intersections={of={x and curve}, by={a,b}}] (a) node [below left] {$a$}
+        (b) node [above right] {$b$};
+    \node[rotate=53] at (1.8,2.2) {$y=f(x)$};
+\end{tikzpicture}
+\end{document} 
